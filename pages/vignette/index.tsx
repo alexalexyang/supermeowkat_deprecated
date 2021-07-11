@@ -1,12 +1,16 @@
+import {
+  Header,
+  PageWrapper,
+} from "../../styles/page-styles/vignette-page-styles";
 import { useEffect, useState } from "react";
 
 import Link from "next/link";
 import { NextPage } from "next";
-import { PageWrapper } from "../../styles/page-styles";
 import Reactions from "../../components/vignette/reactions";
 import SEO from "../../components/seo";
 import fetch from "isomorphic-unfetch";
 import styled from "styled-components";
+import { useGetUserProfile } from "../../utils/user-profile";
 
 const EntriesSection = styled.div`
   width: 100%;
@@ -87,6 +91,7 @@ interface EntryProps {
 interface Props {}
 
 const Vignette: NextPage<Props> = () => {
+  const { data: user } = useGetUserProfile();
   const [entries, setEntries] = useState<EntryProps[]>([]);
 
   // TODO: use react-query
@@ -106,12 +111,15 @@ const Vignette: NextPage<Props> = () => {
     <>
       <SEO page="Vignettes" />
       <PageWrapper>
-        <h1>Vignettes</h1>
+        <Header>
+          <h1>Vignettes</h1>
 
-        {/* TODO: if already 5, do not show link to add more. */}
-        <Link href={`/vignette/edit`}>
-          <a href={`/vignette/edit`}>Edit your vignettes.</a>
-        </Link>
+          {/* TODO: if already 5, do not show link to add more. */}
+
+          <Link href={`/vignette/edit`}>
+            <a href={`/vignette/edit`}>Edit your vignettes.</a>
+          </Link>
+        </Header>
 
         <EntriesSection>
           {entries.map((entry: EntryProps) => (
@@ -119,7 +127,7 @@ const Vignette: NextPage<Props> = () => {
               <ArticleH2>{entry.title}</ArticleH2>
               <ArticleP>{entry.body}</ArticleP>
               <ArticleFooter>
-                <Reactions entryId={entry._id} />
+                <Reactions entryId={entry._id} user={user} />
               </ArticleFooter>
             </StyledArticle>
           ))}

@@ -21,13 +21,13 @@ const Prompt: NextPage<Props> = () => {
     <>
       {togglePrompt === false && (
         <GenericButton onClick={() => setTogglePrompt(!togglePrompt)}>
-          Open prompt
+          Open prompts
         </GenericButton>
       )}
       {togglePrompt && (
         <PromptSection>
           <CloseButton
-            ariaLabel="Close prompt"
+            ariaLabel="Close prompts"
             onClick={() => setTogglePrompt(!togglePrompt)}
           />
 

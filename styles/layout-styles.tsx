@@ -4,8 +4,8 @@ import styled, { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
   html, body {
     background-color: ${layoutStyles.backgroundColor};
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     margin: 0;
     display: flex;
     flex-direction: column;

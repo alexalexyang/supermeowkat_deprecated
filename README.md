@@ -6,7 +6,7 @@
 
 - Profile
   - Allow only 5 vignettes
-  - Vignettes page
+  - Display paginated vignettes on a Vignettes page
   - Allow people to like vignettes
   - Make vignettes look cleaner
     - Hide prompt and past vignettes and/or move past vignettes elsewhere

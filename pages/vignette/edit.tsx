@@ -1,6 +1,8 @@
 import {
   CharacterCountSection,
   CounterSpan,
+  EditVignetteWrapper,
+  Header,
   PageWrapper,
   PastVignettesSection,
   StyledDetails,
@@ -13,7 +15,7 @@ import { useEffect, useState } from "react";
 
 import { GenericButton } from "../../styles/buttons";
 import { NextPage } from "next";
-import Prompt from "../../components/vignette/prompt";
+import Prompts from "../../components/vignette/prompts-section";
 import SEO from "../../components/seo";
 import { StyledForm } from "../../styles/forms";
 import { StyledWarning } from "../../styles/misc-styles";
@@ -75,14 +77,15 @@ const EditVignette: NextPage<Props> = () => {
     <>
       <SEO page="Vignettes" />
       <PageWrapper>
-        <h1>Edit Vignettes</h1>
-        <p>You get 5 vignettes per week.</p>
+        <Header>
+          <h1>Edit Vignettes</h1>
+          <p>You get 5 vignettes per week.</p>
 
-        <p>The latest vignettes are randomised and displayed.</p>
-
+          <p>The latest vignettes are randomised and displayed.</p>
+        </Header>
         {entries.length < 5 && (
-          <>
-            <Prompt />
+          <EditVignetteWrapper>
+            <Prompts />
             <WritingSection aria-label="Writing section">
               <StyledForm onSubmit={handleSubmit(onSubmit)}>
                 <label htmlFor="title">
@@ -126,7 +129,7 @@ const EditVignette: NextPage<Props> = () => {
                 </WritingSectionFooter>
               </StyledForm>
             </WritingSection>
-          </>
+          </EditVignetteWrapper>
         )}
 
         {entries.length > 0 && (

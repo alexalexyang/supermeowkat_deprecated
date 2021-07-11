@@ -5,7 +5,9 @@ import NoStopping from "../../styles/icons/no-stopping-icon";
 import { RoundButton } from "../../styles/buttons";
 import SolidHeart from "../../styles/icons/heart-solid-icon";
 import TropicalFlower from "../../styles/icons/tropical-flower-icon";
+import { UserProfileProps } from "../../types/types";
 import YellowUmbrella from "../../styles/icons/yellow-umbrella-icon";
+import fetch from "isomorphic-unfetch";
 import styled from "styled-components";
 import { useState } from "react";
 
@@ -17,12 +19,13 @@ const StyledRoundButton = styled(RoundButton)`
   padding: 2px;
 
   :hover {
-    transform: scale(1.5);
+    transform: scale(1.5) translateY(-30%);
   }
 `;
 
 const Wrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   align-items: center;
   width: fit-content;
@@ -30,14 +33,23 @@ const Wrapper = styled.div`
 
 interface Props {
   entryId: string;
+  user: UserProfileProps;
 }
 
-const Reactions: NextPage<Props> = ({ entryId }: Props) => {
+const Reactions: NextPage<Props> = ({ entryId, user }: Props) => {
   const [showReactions, setShowReactions] = useState<boolean>(false);
 
-  const submitReaction = () => {
+  const submitReaction = async (reaction: string) => {
     // sends reaction to back end.
-    console.log(entryId);
+    console.log(reaction);
+    const { status } = await fetch("/api/vignette/post-reaction", {
+      method: "POST",
+      body: JSON.stringify({
+        id: user.id,
+        entryId,
+        reaction,
+      }),
+    });
   };
 
   return (
@@ -45,7 +57,7 @@ const Reactions: NextPage<Props> = ({ entryId }: Props) => {
       <Wrapper>
         <StyledRoundButton>
           <CatUnicorn />
-        </StyledRoundButton>{" "}
+        </StyledRoundButton>
       </Wrapper>
       <Wrapper>
         <StyledRoundButton
@@ -56,30 +68,29 @@ const Reactions: NextPage<Props> = ({ entryId }: Props) => {
         </StyledRoundButton>
         {showReactions && (
           <>
-            {" "}
             <StyledRoundButton
               onClick={() => {
                 setShowReactions(!showReactions);
-                submitReaction();
+                submitReaction("cat-unicorn");
               }}
             >
               <CatUnicorn />
-            </StyledRoundButton>{" "}
+            </StyledRoundButton>
             <StyledRoundButton>
               <SolidHeart />
-            </StyledRoundButton>{" "}
+            </StyledRoundButton>
             <StyledRoundButton>
               <TropicalFlower />
-            </StyledRoundButton>{" "}
+            </StyledRoundButton>
             <StyledRoundButton>
               <YellowUmbrella />
-            </StyledRoundButton>{" "}
+            </StyledRoundButton>
             <StyledRoundButton>
               <NoStopping />
-            </StyledRoundButton>{" "}
+            </StyledRoundButton>
             <StyledRoundButton>
               <Anger />
-            </StyledRoundButton>{" "}
+            </StyledRoundButton>
           </>
         )}
       </Wrapper>

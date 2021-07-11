@@ -7,11 +7,23 @@ export const PageWrapper = styled.div`
   padding: 1rem;
 `;
 
+export const Header = styled.section`
+  margin-bottom: 2.5rem;
+`;
+
+export const EditVignetteWrapper = styled.div`
+  height: auto;
+  width: 100%;
+
+  > * {
+    margin-bottom: 3rem;
+  }
+`;
+
 export const WritingSection = styled.section`
   height: auto;
   box-sizing: border-box;
   width: 100%;
-  margin: 0.5rem 0;
   border-radius: 0.5rem;
   border: 1px solid lightgray;
   padding: 1rem;
@@ -24,10 +36,6 @@ export const WritingSection = styled.section`
 
   > :not(:last-child) {
     margin-bottom: 1rem;
-  }
-
-  :hover {
-    background-color: cornsilk;
   }
 `;
 
@@ -98,12 +106,8 @@ export const StyledInput = styled.input`
 `;
 
 export const PastVignettesSection = styled(WritingSection)`
-  background-color: whitesmoke;
+  background-color: cornsilk;
   text-align: left;
-
-  :hover {
-    background-color: lightyellow;
-  }
 `;
 
 export const StyledDetails = styled.details`
@@ -116,6 +120,6 @@ export const StyledDetails = styled.details`
   }
 
   :hover {
-    background-color: cornsilk;
+    background-color: lemonchiffon;
   }
 `;
