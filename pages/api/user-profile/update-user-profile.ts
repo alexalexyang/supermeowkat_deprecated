@@ -17,23 +17,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if (userDataKeys.includes("email")) {
-      const management = await getManagementClient();
-
-      await management.updateUser(
-        { id: await getUserAuth0Id(req, res) },
-        {
-          email: userData["email"],
-        },
-        (err: unknown) => {
-          if (err) {
-            throw err;
-          }
-        }
-      );
+      // TODO: error handling
+      await updateEmail(req, res, userData);
     }
 
     if (userDataKeys.includes("email") && userDataKeys.length === 1) {
-      return res.status(200).json({ status: "success" });
+      return res
+        .status(200)
+        .json({ status: "success", test: "hello", userData });
     }
 
     const _id = new ObjectId(id);
@@ -46,11 +37,33 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     );
 
     if (modifiedCount === 1 || upsertedCount === 1) {
-      return res.status(200).json({ status: "success" });
+      return res
+        .status(200)
+        .json({ status: "success", test: "hello", userData });
     }
 
     return res.status(500).json({ status: "fail" });
   } catch (error) {
     res.status(error.status || 500).json({ success: false });
   }
+};
+
+const updateEmail = async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+  userData: any
+) => {
+  const management = await getManagementClient();
+
+  return await management.updateUser(
+    { id: await getUserAuth0Id(req, res) },
+    {
+      email: userData["email"],
+    },
+    (err: unknown) => {
+      if (err) {
+        throw err;
+      }
+    }
+  );
 };

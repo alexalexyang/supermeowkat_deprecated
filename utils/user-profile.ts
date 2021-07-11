@@ -1,7 +1,6 @@
-import { useMutation, useQuery } from "react-query";
-
 import { UserProfileProps } from "../types/types";
 import fetch from "isomorphic-unfetch";
+import { useQuery } from "react-query";
 
 export const useGetUserProfile = () =>
   useQuery("user", async () => {
@@ -19,7 +18,6 @@ export const useGetUserProfile = () =>
         age,
         birthday,
         handle,
-        email,
         gender,
         city,
         country,
@@ -47,7 +45,7 @@ export const useGetUserProfile = () =>
       age,
       birthday,
       handle,
-      email,
+      email: userDataAuth0.email,
       gender,
       city,
       country,
@@ -62,10 +60,8 @@ type UpdateUserProps = {
   userData: Record<string, string>;
 };
 
-export const useUpdateUserProfile = () =>
-  useMutation((updates: UpdateUserProps) =>
-    fetch("/api/user-profile/update-user-profile", {
-      method: "POST",
-      body: JSON.stringify(updates),
-    })
-  );
+export const updateUserProfile = (updates: UpdateUserProps) =>
+  fetch("/api/user-profile/update-user-profile", {
+    method: "POST",
+    body: JSON.stringify(updates),
+  });

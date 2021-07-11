@@ -11,7 +11,6 @@ const auth0Client = initAuth0({
   secret: <string>serverRuntimeConfig.AUTH0_SESSION_COOKIE_SECRET,
   clientID: <string>serverRuntimeConfig.AUTH0_CLIENT_ID,
   clientSecret: <string>serverRuntimeConfig.AUTH0_CLIENT_SECRET,
-  // audience: <string>serverRuntimeConfig.AUTH0_AUDIENCE,
   // scope: "openid profile",
   routes: {
     postLogoutRedirect: <string>serverRuntimeConfig.AUTH0_LOGOUT_REDIRECT_URI,
@@ -44,7 +43,7 @@ export const getUserAuth0Id = async (
 };
 
 const authClient: any = new AuthenticationClient({
-  domain: serverRuntimeConfig.AUTH0_ISSUER_BASE_URL,
+  domain: serverRuntimeConfig.AUTH0_DOMAIN,
   clientId: serverRuntimeConfig.AUTH0_CLIENT_ID,
   clientSecret: serverRuntimeConfig.AUTH0_CLIENT_SECRET,
 });
@@ -57,7 +56,7 @@ const getAuth0Token = () =>
 export const getManagementClient: any = async () =>
   new ManagementClient({
     token: (await getAuth0Token()).access_token,
-    domain: serverRuntimeConfig.AUTH0_ISSUER_BASE_URL,
+    domain: serverRuntimeConfig.AUTH0_DOMAIN,
     clientId: serverRuntimeConfig.AUTH0_CLIENT_ID,
     clientSecret: serverRuntimeConfig.AUTH0_CLIENT_SECRET,
   });

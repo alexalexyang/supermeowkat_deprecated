@@ -1,9 +1,6 @@
 # Todo
 
-- React-query optimistic update for user profile
-  - look up if invalidation is necessary
-
-## Milestone
+## Milestones
 
 ### 1.21:
 
@@ -13,9 +10,6 @@
   - Allow people to like vignettes
   - Make vignettes look cleaner
     - Hide prompt and past vignettes and/or move past vignettes elsewhere
-  - React-query for user profile
-    - optimistic update
-    - look up if invalidation is necessary
   - Get city from browser
 
 ### 1.22

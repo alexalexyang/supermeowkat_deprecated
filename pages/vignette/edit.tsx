@@ -34,6 +34,7 @@ const EditVignette: NextPage<Props> = () => {
     formState: { errors },
   } = useForm();
 
+  // TODO: use react-query
   useEffect(() => {
     const results = async () => {
       if (!profile || !profile.id) {
@@ -57,6 +58,7 @@ const EditVignette: NextPage<Props> = () => {
   }
 
   const onSubmit = async ({ title, body }: { title: string; body: string }) => {
+    // TODO: use react-query
     const { status } = await fetch("/api/vignette/post-entry", {
       method: "POST",
       body: JSON.stringify({

@@ -1,11 +1,12 @@
 import { Input, StyledForm } from "../../styles/forms";
+import { useMutation, useQueryClient } from "react-query";
 
 import { GenericButton } from "../../styles/buttons";
 import { NextPage } from "next";
 import { StyledWarning } from "../../styles/misc-styles";
 import { UserProfileProps } from "../../types/types";
+import { updateUserProfile } from "../../utils/user-profile";
 import { useForm } from "react-hook-form";
-import { useUpdateUserProfile } from "../../utils/user-profile";
 
 interface Props {
   profile: UserProfileProps;
@@ -13,7 +14,7 @@ interface Props {
 
 const ProfileForm: NextPage<Props> = ({ profile }: Props) => {
   const { id, age, birthday, email, handle, gender, city, country, job } =
-    profile || {};
+    profile;
 
   const {
     register,
@@ -23,7 +24,13 @@ const ProfileForm: NextPage<Props> = ({ profile }: Props) => {
     defaultValues: { age, birthday, email, handle, gender, city, country, job },
   });
 
-  const updateProfile = useUpdateUserProfile();
+  const queryClient = useQueryClient();
+  const updateProfile = useMutation(updateUserProfile, {
+    onSuccess: async (data) => {
+      const { userData } = await data.json();
+      queryClient.setQueryData("user", { ...profile, ...userData });
+    },
+  });
 
   const onSubmit = async (formData: { [key: string]: string }) => {
     const keys = Object.keys(profile).filter(
@@ -39,6 +46,7 @@ const ProfileForm: NextPage<Props> = ({ profile }: Props) => {
     // console.log(
     //   keys.forEach((key) => console.log(key, formData[key], profile[key]))
     // );
+
     const userData: Record<string, string> = {};
 
     changedFields.forEach((field) => (userData[field] = formData[field]));
@@ -48,6 +56,16 @@ const ProfileForm: NextPage<Props> = ({ profile }: Props) => {
 
   return (
     <>
+      {updateProfile.isLoading && (
+        <div>
+          <p>Updating profile...</p>
+        </div>
+      )}
+      {updateProfile.isSuccess && (
+        <div>
+          <p>Profile updated!</p>
+        </div>
+      )}
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="email">
           Email

@@ -8,15 +8,6 @@ import SEO from "../../components/seo";
 import fetch from "isomorphic-unfetch";
 import styled from "styled-components";
 
-// import { useQuery } from "react-query";
-
-// export const useGetVignettes = (id: string) =>
-//   useQuery(
-//     "vignettes",
-//     async () => await fetch(`/api/vignette/get-entries?id=${id}`),
-//     { refetchOnMount: "always", enabled: !!id }
-//   );
-
 const EntriesSection = styled.div`
   width: 100%;
 
@@ -98,6 +89,7 @@ interface Props {}
 const Vignette: NextPage<Props> = () => {
   const [entries, setEntries] = useState<EntryProps[]>([]);
 
+  // TODO: use react-query
   useEffect(() => {
     const results = async () => {
       const res = await (await fetch(`/api/vignette/get-entries`)).json();
@@ -115,6 +107,8 @@ const Vignette: NextPage<Props> = () => {
       <SEO page="Vignettes" />
       <PageWrapper>
         <h1>Vignettes</h1>
+
+        {/* TODO: if already 5, do not show link to add more. */}
         <Link href={`/vignette/edit`}>
           <a href={`/vignette/edit`}>Edit your vignettes.</a>
         </Link>

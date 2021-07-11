@@ -5,6 +5,7 @@ import { connectToDatabase } from "../db-connections/helper";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
+    // TODO: reject if already have 5 entries.
     const { id, title, body } = JSON.parse(req.body);
 
     if (title.length === 0 || body.length === 0) {
