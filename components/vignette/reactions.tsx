@@ -15,6 +15,10 @@ const StyledRoundButton = styled(RoundButton)`
   height: 2rem;
   width: 2rem;
   padding: 2px;
+
+  :hover {
+    transform: scale(1.5);
+  }
 `;
 
 const Wrapper = styled.div`
