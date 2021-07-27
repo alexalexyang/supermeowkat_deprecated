@@ -5,6 +5,7 @@ import {
 import { useEffect, useState } from "react";
 
 import Link from "next/link";
+import Loading from "../../components/loading";
 import { NextPage } from "next";
 import Reactions from "../../components/vignette/reactions";
 import SEO from "../../components/seo";
@@ -106,6 +107,10 @@ const Vignette: NextPage<Props> = () => {
 
     results();
   }, []);
+
+  if (!user) {
+    return <Loading />;
+  }
 
   return (
     <>
