@@ -33,8 +33,6 @@ export const useGetUserProfile = () =>
       })
     ).json();
 
-    console.log("_id:", _id);
-
     if (!success) {
       return undefined;
     }

@@ -10,7 +10,7 @@ import {
   StyledTextArea,
   WritingSection,
   WritingSectionFooter,
-} from "../../styles/page-styles/vignette-page-styles";
+} from "../../styles/page-styles/vignette-edit-page-styles";
 import { useEffect, useState } from "react";
 
 import { GenericButton } from "../../styles/buttons";
@@ -54,6 +54,8 @@ const EditVignette: NextPage<Props> = () => {
 
     results();
   }, []);
+
+  console.log(entries);
 
   if (isLoading || !profile) {
     return <>Loading...</>;
