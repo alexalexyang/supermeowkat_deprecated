@@ -6,8 +6,8 @@
 
 - Profile
   - Allow only 5 vignettes
-  - Display paginated vignettes on a Vignettes page
-  - Allow people to like vignettes
+  - Display paginated vignettes on a Vignettes page (use react-query)
+  - Allow people to like vignettes (use react-query)
   - Make vignettes look cleaner
     - Hide prompt and past vignettes and/or move past vignettes elsewhere
   - Get city from browser

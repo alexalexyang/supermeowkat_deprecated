@@ -31,7 +31,7 @@ const Dashboard: NextPage = () => {
                 <SettingsIcon alt="settings" />
               </DashboardItem>
 
-              <DashboardItem url="/vignette" title="Vignettes">
+              <DashboardItem url="/vignettes" title="Vignettes">
                 <VignettesIcon alt="vignettes" />
               </DashboardItem>
             </DashboardStyles.LinksWrapper>
