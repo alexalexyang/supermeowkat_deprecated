@@ -13,7 +13,7 @@ import {
 import Link from "next/link";
 import Loading from "../../components/loading";
 import { NextPage } from "next";
-import Reactions from "../../components/vignette/reactions";
+import Reactions from "../../components/vignette/display-page/reactions";
 import SEO from "../../components/seo";
 import { useGetUserProfile } from "../../utils/user-profile";
 import { useGetVignettes } from "./helpers";
@@ -40,8 +40,6 @@ const Vignette: NextPage<Props> = () => {
       <PageWrapper>
         <Header>
           <h1>Vignettes</h1>
-
-          {/* TODO: if already 5, do not show link to add more. */}
 
           <Link href={`/vignettes/edit`}>
             <a href={`/vignettes/edit`}>Add/edit your vignettes.</a>

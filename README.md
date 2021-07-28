@@ -7,6 +7,8 @@
 - Vignettes
 
   - optimistic updates for add/edit
+    - get user vignettes, replace, then replace.
+    - use same api endpoint for add new and edit.
   - Paginate display vignettes
   - Allow people to like vignettes (use react-query)
   - Fix refetch on mount for display and add/edit vignettes

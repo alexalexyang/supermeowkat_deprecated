@@ -16,14 +16,26 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       })
     ).toArray();
 
-    // console.log(results);
+    const data = results.map(
+      (item: {
+        user_id: string;
+        _id: string;
+        title: string;
+        body: string;
+      }) => ({
+        userId: item.user_id,
+        entryId: item._id,
+        title: item.title,
+        body: item.body,
+      })
+    );
 
-    if (results.length > 0) {
-      return res.status(200).json({ status: "success", results });
+    if (data.length > 0) {
+      return res.status(200).json({ status: "success", data });
     }
 
-    if (results.length === 0) {
-      return res.status(404).json({ status: "success", results: [] });
+    if (data.length === 0) {
+      return res.status(404).json({ status: "success", data: [] });
     }
 
     return res.status(500).json({ status: "fail" });

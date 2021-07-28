@@ -1,88 +1,28 @@
 import {
-  CharacterCountSection,
-  CounterSpan,
   EditVignetteWrapper,
   Header,
   PageWrapper,
-  PastVignettesSection,
-  StyledDetails,
-  StyledInput,
-  StyledTextArea,
-  WritingSection,
-  WritingSectionFooter,
 } from "../../styles/page-styles/vignette-edit-page-styles";
-import { useEffect, useState } from "react";
 
-import { GenericButton } from "../../styles/buttons";
 import { NextPage } from "next";
-import Prompts from "../../components/vignette/prompts-section";
+import PastVignettesSection from "../../components/vignette/edit-page/past-vignettes-section";
+import Prompts from "../../components/vignette/edit-page/prompts-section";
 import SEO from "../../components/seo";
-import { StyledForm } from "../../styles/forms";
-import { StyledWarning } from "../../styles/misc-styles";
-import fetch from "isomorphic-unfetch";
-import { useForm } from "react-hook-form";
+import WritingSection from "../../components/vignette/edit-page/writing-section";
 import { useGetUserProfile } from "../../utils/user-profile";
-
-// import { useMutation } from "react-query";
+import { useGetUserVignettes } from "./helpers";
 
 interface Props {}
 
 const EditVignette: NextPage<Props> = () => {
-  const { data: profile, isLoading } = useGetUserProfile();
-  const [characterCount, setCharacterCount] = useState<number>(0);
-  const [entries, setEntries] = useState<object[]>([]);
+  const { data: profile, isLoading: profileLoading } = useGetUserProfile();
 
-  // const addOrEditEntry = useMutation(, {
-  //   onSuccess: async (data) => {
-  //     const { userData } = await data.json();
-  //     queryClient.setQueryData("user", { ...profile, ...userData });
-  //   },
-  // });
+  const { data: userVignettes, isLoading: vignettesLoading } =
+    useGetUserVignettes(profile.id);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  // TODO: use react-query
-  useEffect(() => {
-    const results = async () => {
-      if (!profile || !profile.id) {
-        return;
-      }
-
-      const res = await (
-        await fetch(`/api/vignette/get-user-entries?id=${profile.id}`)
-      ).json();
-
-      if (res.results.length > 0) {
-        setEntries(res.results);
-      }
-    };
-
-    results();
-  }, []);
-
-  console.log(entries);
-
-  if (isLoading || !profile) {
+  if (profileLoading || !profile || vignettesLoading) {
     return <>Loading...</>;
   }
-
-  const onSubmit = async ({ title, body }: { title: string; body: string }) => {
-    // TODO: use react-query
-    const { status } = await fetch("/api/vignette/post-entry", {
-      method: "POST",
-      body: JSON.stringify({
-        id: profile.id,
-        title,
-        body,
-      }),
-    });
-
-    console.log(status);
-  };
 
   return (
     <>
@@ -94,66 +34,15 @@ const EditVignette: NextPage<Props> = () => {
 
           <p>The latest vignettes are randomised and displayed.</p>
         </Header>
-        {entries.length < 5 && (
+        {userVignettes.length < 5 && (
           <EditVignetteWrapper>
             <Prompts />
-            <WritingSection aria-label="Writing section">
-              <StyledForm onSubmit={handleSubmit(onSubmit)}>
-                <label htmlFor="title">
-                  <StyledInput
-                    aria-label="title"
-                    id="title"
-                    placeholder="What's the title?"
-                    type="text"
-                    maxLength={64}
-                    {...register("title", { maxLength: 64, required: true })}
-                  />
-                  {errors.email?.type === "maxLength" && (
-                    <StyledWarning>
-                      Title cannot have more than 64 characters.
-                    </StyledWarning>
-                  )}
-                </label>
-                <label htmlFor="body">
-                  <StyledTextArea
-                    aria-label="body"
-                    id="body"
-                    placeholder="Express yourself"
-                    maxLength={500}
-                    {...register("body", { required: true })}
-                    onChange={(e) => setCharacterCount(e.target.value.length)}
-                  />
-                </label>
-                <WritingSectionFooter>
-                  <CharacterCountSection>
-                    <CounterSpan
-                      aria-label="character count"
-                      color={characterCount > 450 ? "darkviolet" : undefined}
-                    >
-                      {characterCount}
-                    </CounterSpan>
-                    / 500
-                  </CharacterCountSection>
-                  <GenericButton type="submit" disabled={characterCount < 1}>
-                    Submit
-                  </GenericButton>
-                </WritingSectionFooter>
-              </StyledForm>
-            </WritingSection>
+            <WritingSection profile={profile} />
           </EditVignetteWrapper>
         )}
 
-        {entries.length > 0 && (
-          <PastVignettesSection>
-            <h2>Past vignettes</h2>
-
-            {entries.map((item: any, idx) => (
-              <StyledDetails key={idx}>
-                <summary>{item.title}</summary>
-                <p>{item.body}</p>
-              </StyledDetails>
-            ))}
-          </PastVignettesSection>
+        {userVignettes.length > 0 && (
+          <PastVignettesSection entries={userVignettes} />
         )}
       </PageWrapper>
     </>

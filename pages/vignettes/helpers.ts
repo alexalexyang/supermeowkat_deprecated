@@ -1,3 +1,4 @@
+import { VignetteEntryProps } from "../../types/types";
 import fetch from "isomorphic-unfetch";
 import { useQuery } from "react-query";
 
@@ -13,3 +14,32 @@ export const useGetVignettes = () =>
     },
     { refetchOnMount: "always" }
   );
+
+export const useGetUserVignettes = (userId: string) =>
+  useQuery(
+    "user-vignettes",
+    async () => {
+      const { data } = await (
+        await fetch(`/api/vignette/get-user-entries?id=${userId}`)
+      ).json();
+
+      return data;
+    },
+    { refetchOnMount: "always" }
+  );
+
+export const addEditVignette = ({
+  userId,
+  entryId,
+  title,
+  body,
+}: VignetteEntryProps) =>
+  fetch("/api/vignette/post-entry", {
+    method: "POST",
+    body: JSON.stringify({
+      userId,
+      entryId,
+      title,
+      body,
+    }),
+  });

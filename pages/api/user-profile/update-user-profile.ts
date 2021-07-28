@@ -22,9 +22,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if (userDataKeys.includes("email") && userDataKeys.length === 1) {
-      return res
-        .status(200)
-        .json({ status: "success", test: "hello", userData });
+      return res.status(200).json({ status: "success", userData });
     }
 
     const _id = new ObjectId(id);

@@ -5,7 +5,7 @@ import { connectToDatabase } from "../db-connections/helper";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { id, title, body } = JSON.parse(req.body);
+    const { userId, title, body } = JSON.parse(req.body);
 
     if (title.length === 0 || body.length === 0) {
       return res
@@ -13,7 +13,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         .json({ success: false, message: "Missing fields." });
     }
 
-    const user_id = new ObjectId(id);
+    const user_id = new ObjectId(userId);
 
     const conn = (await connectToDatabase("vignette")).collection("entry");
 
@@ -30,7 +30,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     if (insertedCount === 1) {
-      return res.status(200).json({ status: "success" });
+      return res
+        .status(200)
+        .json({ status: "success", entry: { title, body } });
     }
 
     return res.status(500).json({ status: "fail" });

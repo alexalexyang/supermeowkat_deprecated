@@ -20,7 +20,7 @@ export const EditVignetteWrapper = styled.div`
   }
 `;
 
-export const WritingSection = styled.section`
+export const WritingSectionWrapper = styled.section`
   height: auto;
   box-sizing: border-box;
   width: 100%;
@@ -57,7 +57,7 @@ export const CounterSpan = styled.span<{
   color: ${({ color }) => (color ? color : "inherit")};
 `;
 
-export const PromptSection = styled(WritingSection)`
+export const PromptSection = styled(WritingSectionWrapper)`
   display: flex;
   flex-direction: column;
   background-color: honeydew;
@@ -105,7 +105,7 @@ export const StyledInput = styled.input`
   }
 `;
 
-export const PastVignettesSection = styled(WritingSection)`
+export const PastVignettesSectionWrapper = styled(WritingSectionWrapper)`
   background-color: cornsilk;
   text-align: left;
 `;

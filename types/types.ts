@@ -71,3 +71,10 @@ export type UserProfileProps = {
   country: string;
   job: string;
 };
+
+export type VignetteEntryProps = {
+  userId: string;
+  entryId?: string;
+  title: string;
+  body: string;
+};

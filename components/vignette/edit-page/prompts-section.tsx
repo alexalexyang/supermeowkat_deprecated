@@ -1,10 +1,10 @@
 import {
   PromptSection,
   StyledSpan,
-} from "../../styles/page-styles/vignette-edit-page-styles";
+} from "../../../styles/page-styles/vignette-edit-page-styles";
 
-import CloseButton from "../close-button";
-import { GenericButton } from "../../styles/buttons";
+import CloseButton from "../../close-button";
+import { GenericButton } from "../../../styles/buttons";
 import { NextPage } from "next";
 import { useState } from "react";
 
