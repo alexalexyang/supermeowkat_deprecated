@@ -29,13 +29,10 @@ interface Props {}
 const Vignette: NextPage<Props> = () => {
   const { data: user } = useGetUserProfile();
   const { data: vignettes, isLoading } = useGetVignettes();
-  // console.log(vignettes);
 
   if (!user || isLoading) {
     return <Loading />;
   }
-
-  // console.log(vignettes);
 
   return (
     <>
@@ -47,7 +44,7 @@ const Vignette: NextPage<Props> = () => {
           {/* TODO: if already 5, do not show link to add more. */}
 
           <Link href={`/vignettes/edit`}>
-            <a href={`/vignettes/edit`}>Edit your vignettes.</a>
+            <a href={`/vignettes/edit`}>Add/edit your vignettes.</a>
           </Link>
         </Header>
 

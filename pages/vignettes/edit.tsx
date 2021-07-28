@@ -23,12 +23,21 @@ import fetch from "isomorphic-unfetch";
 import { useForm } from "react-hook-form";
 import { useGetUserProfile } from "../../utils/user-profile";
 
+// import { useMutation } from "react-query";
+
 interface Props {}
 
 const EditVignette: NextPage<Props> = () => {
   const { data: profile, isLoading } = useGetUserProfile();
   const [characterCount, setCharacterCount] = useState<number>(0);
   const [entries, setEntries] = useState<object[]>([]);
+
+  // const addOrEditEntry = useMutation(, {
+  //   onSuccess: async (data) => {
+  //     const { userData } = await data.json();
+  //     queryClient.setQueryData("user", { ...profile, ...userData });
+  //   },
+  // });
 
   const {
     register,

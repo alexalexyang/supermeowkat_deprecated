@@ -5,7 +5,6 @@ import { connectToDatabase } from "../db-connections/helper";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    // TODO: reject if already have 5 entries.
     const { id, title, body } = JSON.parse(req.body);
 
     if (title.length === 0 || body.length === 0) {
@@ -18,13 +17,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const conn = (await connectToDatabase("vignette")).collection("entry");
 
-    // const existing = await conn.find({user_id})
+    const existing = await (await conn.find({ user_id })).toArray();
 
-    // if (existing.length === 5) {
-    //   return res
-    //   .status(422)
-    //   .json({ success: false, message: "Already full." });
-    // }
+    if (existing.length === 5) {
+      return res.status(422).json({ success: false, message: "Already full." });
+    }
 
     const { insertedCount } = await conn.insertOne({
       user_id,

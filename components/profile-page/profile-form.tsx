@@ -43,10 +43,6 @@ const ProfileForm: NextPage<Props> = ({ profile }: Props) => {
         formData[key] !== profile[key as keyof UserProfileProps]
     );
 
-    // console.log(
-    //   keys.forEach((key) => console.log(key, formData[key], profile[key]))
-    // );
-
     const userData: Record<string, string> = {};
 
     changedFields.forEach((field) => (userData[field] = formData[field]));

@@ -9,6 +9,7 @@ import { useEffect } from "react";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
+      refetchOnMount: "always",
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,
       retry: false,

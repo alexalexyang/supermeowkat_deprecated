@@ -4,12 +4,14 @@
 
 ### 1.21:
 
-- Profile
-  - Allow only 5 vignettes
-  - Display paginated vignettes on a Vignettes page (use react-query)
+- Vignettes
+
+  - optimistic updates for add/edit
+  - Paginate display vignettes
   - Allow people to like vignettes (use react-query)
-  - Make vignettes look cleaner
-    - Hide prompt and past vignettes and/or move past vignettes elsewhere
+  - Fix refetch on mount for display and add/edit vignettes
+
+- Profile
   - Get city from browser
 
 ### 1.22
