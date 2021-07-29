@@ -2,21 +2,24 @@
 
 ## Milestones
 
-### 1.21:
+### 1.21
 
 - Vignettes
 
-  - optimistic updates for add/edit
-    - get user vignettes, replace, then replace.
-    - use same api endpoint for add new and edit.
   - Paginate display vignettes
+    - Extract a few to display on top in random manner
+    - Paginate the rest
   - Allow people to like vignettes (use react-query)
-  - Fix refetch on mount for display and add/edit vignettes
 
 - Profile
   - Get city from browser
 
 ### 1.22
+
+- WebRTC for text-messaging between clients
+- General clean-up, make sure everything works
+
+### 1.23
 
 - Create page to display costs of running an app
 - Set up Patreon/buymeacoffee/other for cash
@@ -40,11 +43,6 @@
 
 ### 2.2:
 
-- WebRTC for text-messaging between clients
-- General clean-up, make sure everything works
-
-### 3:
-
 - Allow users to match only after age and city are filled in
 - Buy ads on different platforms in a sequential manner to study their effectiveness
 - Allow accounts for Sweden and Germany
@@ -52,14 +50,10 @@
 
 ## Long term TODO:
 
+- Allow saving vignette entry as draft
 - Research Calibre for books
 - Maybe add academic papers?
 - Add food. Take photos, tag them, upload to backblaze. Collaborate with influencers to get photos of diverse cuisine. Or just get recipes from some recipes API and cross-reference by keyword to OSM data on restaurants.
-
-### KIV:
-
-- invite-form.tsx:
-  - render invited and alreadyInvited
 
 # References
 

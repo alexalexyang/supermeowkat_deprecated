@@ -6,13 +6,13 @@ import {
   WritingSectionFooter,
   WritingSectionWrapper,
 } from "../../../styles/page-styles/vignette-edit-page-styles";
+import { UserProfileProps, VignetteEntryProps } from "../../../types/types";
 import { useMutation, useQueryClient } from "react-query";
 
 import { GenericButton } from "../../../styles/buttons";
 import { NextPage } from "next";
 import { StyledForm } from "../../../styles/forms";
 import { StyledWarning } from "../../../styles/misc-styles";
-import { UserProfileProps } from "../../../types/types";
 import { addEditVignette } from "../../../pages/vignettes/helpers";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -27,10 +27,15 @@ const WritingSection: NextPage<Props> = ({ profile }: Props) => {
   const queryClient = useQueryClient();
   const addEditEntry = useMutation(addEditVignette, {
     onSuccess: async (data) => {
-      const { entry } = await data.json();
+      const { data: updatedEntry } = await data.json();
 
-      // TODO: get user vignettes, replace, then replace.
-      queryClient.setQueryData("user-vignettes", { ...entry });
+      const cachedEntries = queryClient.getQueryData(
+        "user-vignettes"
+      ) as VignetteEntryProps[];
+
+      cachedEntries.push(updatedEntry);
+
+      queryClient.setQueryData("user-vignettes", cachedEntries);
     },
   });
 
@@ -52,12 +57,12 @@ const WritingSection: NextPage<Props> = ({ profile }: Props) => {
     <WritingSectionWrapper aria-label="Writing section">
       {addEditEntry.isLoading && (
         <div>
-          <p>Updating profile...</p>
+          <p>Adding vignette...</p>
         </div>
       )}
       {addEditEntry.isSuccess && (
         <div>
-          <p>Profile updated!</p>
+          <p>Vignette updated!</p>
         </div>
       )}
       <StyledForm onSubmit={handleSubmit(onSubmit)}>

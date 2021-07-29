@@ -11,7 +11,7 @@ export const Header = styled.section`
   margin-bottom: 2.5rem;
 `;
 
-export const EditVignetteWrapper = styled.div`
+export const AddVignetteWrapper = styled.div`
   height: auto;
   width: 100%;
 

@@ -1,5 +1,5 @@
 import {
-  EditVignetteWrapper,
+  AddVignetteWrapper,
   Header,
   PageWrapper,
 } from "../../styles/page-styles/vignette-edit-page-styles";
@@ -14,11 +14,11 @@ import { useGetUserVignettes } from "./helpers";
 
 interface Props {}
 
-const EditVignette: NextPage<Props> = () => {
+const EditVignettePage: NextPage<Props> = () => {
   const { data: profile, isLoading: profileLoading } = useGetUserProfile();
 
   const { data: userVignettes, isLoading: vignettesLoading } =
-    useGetUserVignettes(profile.id);
+    useGetUserVignettes(profile?.id);
 
   if (profileLoading || !profile || vignettesLoading) {
     return <>Loading...</>;
@@ -35,10 +35,10 @@ const EditVignette: NextPage<Props> = () => {
           <p>The latest vignettes are randomised and displayed.</p>
         </Header>
         {userVignettes.length < 5 && (
-          <EditVignetteWrapper>
+          <AddVignetteWrapper>
             <Prompts />
             <WritingSection profile={profile} />
-          </EditVignetteWrapper>
+          </AddVignetteWrapper>
         )}
 
         {userVignettes.length > 0 && (
@@ -49,4 +49,4 @@ const EditVignette: NextPage<Props> = () => {
   );
 };
 
-export default EditVignette;
+export default EditVignettePage;

@@ -35,9 +35,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     );
 
     if (modifiedCount === 1 || upsertedCount === 1) {
-      return res
-        .status(200)
-        .json({ status: "success", test: "hello", userData });
+      return res.status(200).json({ status: "success", userData });
     }
 
     return res.status(500).json({ status: "fail" });

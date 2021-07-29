@@ -5,7 +5,7 @@ import { connectToDatabase } from "../db-connections/helper";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { userId, title, body } = JSON.parse(req.body);
+    const { userId, entryId, title, body } = JSON.parse(req.body);
 
     if (title.length === 0 || body.length === 0) {
       return res
@@ -14,6 +14,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const user_id = new ObjectId(userId);
+    const _id = new ObjectId(entryId);
 
     const conn = (await connectToDatabase("vignette")).collection("entry");
 
@@ -23,16 +24,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(422).json({ success: false, message: "Already full." });
     }
 
-    const { insertedCount } = await conn.insertOne({
-      user_id,
-      title,
-      body,
-    });
+    const { modifiedCount, upsertedCount } = await conn.updateOne(
+      { _id },
+      { $set: { user_id, title, body } },
+      { upsert: true }
+    );
 
-    if (insertedCount === 1) {
-      return res
-        .status(200)
-        .json({ status: "success", entry: { title, body } });
+    if (modifiedCount === 1 || upsertedCount === 1) {
+      return res.status(200).json({
+        status: "success",
+        data: { entryId: _id, userId, title, body },
+      });
     }
 
     return res.status(500).json({ status: "fail" });

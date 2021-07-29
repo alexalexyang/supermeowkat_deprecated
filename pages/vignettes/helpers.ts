@@ -15,9 +15,9 @@ export const useGetVignettes = () =>
     { refetchOnMount: "always" }
   );
 
-export const useGetUserVignettes = (userId: string) =>
+export const useGetUserVignettes = (userId: string | undefined) =>
   useQuery(
-    "user-vignettes",
+    ["user-vignettes", userId],
     async () => {
       const { data } = await (
         await fetch(`/api/vignette/get-user-entries?id=${userId}`)
@@ -25,7 +25,7 @@ export const useGetUserVignettes = (userId: string) =>
 
       return data;
     },
-    { refetchOnMount: "always" }
+    { enabled: !!userId }
   );
 
 export const addEditVignette = ({
