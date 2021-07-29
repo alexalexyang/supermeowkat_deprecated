@@ -2,15 +2,20 @@ import { VignetteEntryProps } from "../../types/types";
 import fetch from "isomorphic-unfetch";
 import { useQuery } from "react-query";
 
-export const useGetVignettes = () =>
+export const useGetVignettes = ({ lastEntryId }: { lastEntryId?: string }) =>
   useQuery(
     "vignettes",
     async () => {
-      const { results } = await (
-        await fetch(`/api/vignette/get-entries`)
+      const { entries } = await (
+        await fetch("/api/vignette/get-paginated-entries", {
+          method: "POST",
+          body: JSON.stringify({
+            lastEntryId,
+          }),
+        })
       ).json();
 
-      return results;
+      return entries;
     },
     { refetchOnMount: "always" }
   );

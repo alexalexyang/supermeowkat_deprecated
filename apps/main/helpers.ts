@@ -24,9 +24,7 @@ export const noFunc = async (
   set: StateProps<ContentProps[]>["set"],
   setSet: StateProps<ContentProps[]>["setSet"]
 ) => {
-  // console.log("set", set.data);
   if (!set.data || !set.data.length) {
-    // console.log("no set", set);
     return;
   }
 

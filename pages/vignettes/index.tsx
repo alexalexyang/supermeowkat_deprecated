@@ -14,9 +14,10 @@ import Link from "next/link";
 import Loading from "../../components/loading";
 import { NextPage } from "next";
 import Reactions from "../../components/vignette/display-page/reactions";
+// import { RoundButton } from "../../styles/buttons";
 import SEO from "../../components/seo";
 import { useGetUserProfile } from "../../utils/user-profile";
-import { useGetVignettes } from "./helpers";
+import { useGetVignettes } from "../../components/vignette/helpers";
 
 interface EntryProps {
   _id: string;
@@ -28,7 +29,7 @@ interface Props {}
 
 const Vignette: NextPage<Props> = () => {
   const { data: user } = useGetUserProfile();
-  const { data: vignettes, isLoading } = useGetVignettes();
+  const { data: vignettes, isLoading } = useGetVignettes({});
 
   if (!user || isLoading) {
     return <Loading />;
@@ -57,6 +58,8 @@ const Vignette: NextPage<Props> = () => {
             </StyledArticle>
           ))}
         </EntriesSection>
+
+        {/* <RoundButton onClick={() => fetchNextPage()}>Test</RoundButton> */}
       </PageWrapper>
     </>
   );

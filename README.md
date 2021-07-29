@@ -7,6 +7,7 @@
 - Vignettes
 
   - Paginate display vignettes
+    - https://react-query.tanstack.com/guides/infinite-queries
     - Extract a few to display on top in random manner
     - Paginate the rest
   - Allow people to like vignettes (use react-query)

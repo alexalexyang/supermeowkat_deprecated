@@ -10,7 +10,7 @@ import Prompts from "../../components/vignette/edit-page/prompts-section";
 import SEO from "../../components/seo";
 import WritingSection from "../../components/vignette/edit-page/writing-section";
 import { useGetUserProfile } from "../../utils/user-profile";
-import { useGetUserVignettes } from "./helpers";
+import { useGetUserVignettes } from "../../components/vignette/helpers";
 
 interface Props {}
 

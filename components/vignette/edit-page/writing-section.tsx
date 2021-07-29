@@ -13,7 +13,7 @@ import { GenericButton } from "../../../styles/buttons";
 import { NextPage } from "next";
 import { StyledForm } from "../../../styles/forms";
 import { StyledWarning } from "../../../styles/misc-styles";
-import { addEditVignette } from "../../../pages/vignettes/helpers";
+import { addEditVignette } from "../helpers";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 
@@ -29,9 +29,9 @@ const WritingSection: NextPage<Props> = ({ profile }: Props) => {
     onSuccess: async (data) => {
       const { data: updatedEntry } = await data.json();
 
-      const cachedEntries = queryClient.getQueryData(
-        "user-vignettes"
-      ) as VignetteEntryProps[];
+      const cachedEntries =
+        (queryClient.getQueryData("user-vignettes") as VignetteEntryProps[]) ??
+        [];
 
       cachedEntries.push(updatedEntry);
 

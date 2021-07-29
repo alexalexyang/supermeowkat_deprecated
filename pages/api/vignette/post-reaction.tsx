@@ -9,8 +9,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const user_id = new ObjectId(id);
 
-    console.log(id, entryId, reaction);
-
     const conn = (await connectToDatabase("vignette")).collection("reaction");
 
     const { insertedCount } = await conn.insertOne({

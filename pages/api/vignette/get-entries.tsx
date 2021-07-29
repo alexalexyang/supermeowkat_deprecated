@@ -2,6 +2,9 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 import { connectToDatabase } from "../db-connections/helper";
 
+/**
+ * @deprecated To be replaced with /get-paginated-entries
+ */
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const conn = (await connectToDatabase("vignette")).collection("entry");

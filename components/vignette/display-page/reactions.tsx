@@ -40,8 +40,6 @@ const Reactions: NextPage<Props> = ({ entryId, user }: Props) => {
   const [showReactions, setShowReactions] = useState<boolean>(false);
 
   const submitReaction = async (reaction: string) => {
-    // sends reaction to back end.
-    console.log(reaction);
     const { status } = await fetch("/api/vignette/post-reaction", {
       method: "POST",
       body: JSON.stringify({
@@ -50,6 +48,7 @@ const Reactions: NextPage<Props> = ({ entryId, user }: Props) => {
         reaction,
       }),
     });
+    console.log(status);
   };
 
   return (

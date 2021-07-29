@@ -7,8 +7,6 @@ const TestPage: NextPage = () => {
 
   // const testProfile = queryClient.getQueryData("user");
 
-  // console.log("testProfile: ", testProfile);
-
   return (
     <>
       <h1>Test Page 2</h1>
