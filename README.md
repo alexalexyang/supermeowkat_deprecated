@@ -4,7 +4,7 @@
 
 ### 1.21
 
-- Allow people to like vignettes (use react-query)
+- Use optimistic mutation for reactions
 
 - Profile
   - Get city from browser

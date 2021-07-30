@@ -15,7 +15,6 @@ export default async function me(req: NextApiRequest, res: NextApiResponse) {
     }
     return res.status(404).json({ success: "fail" });
   } catch (error) {
-    console.error(error);
     res.status(error.status || 500).end(error.message);
   }
 }

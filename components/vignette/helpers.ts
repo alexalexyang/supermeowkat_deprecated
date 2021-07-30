@@ -1,6 +1,6 @@
 import { useInfiniteQuery, useQuery } from "react-query";
 
-import { VignetteUserEntryProps } from "../../types/types";
+import { VignetteUserEntryProps } from "../../types/vignette-types";
 import fetch from "isomorphic-unfetch";
 
 const fetchPage = async (pageParam: string) => {
@@ -19,7 +19,7 @@ const fetchPage = async (pageParam: string) => {
 export const useGetVignettes = () =>
   useInfiniteQuery("vignettes", ({ pageParam }) => fetchPage(pageParam), {
     getNextPageParam: (lastPage) => {
-      if (!lastPage) {
+      if (!lastPage || !lastPage[lastPage.length - 1]) {
         return;
       }
 

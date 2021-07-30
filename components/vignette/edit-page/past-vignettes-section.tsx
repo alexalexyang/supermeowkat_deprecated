@@ -4,7 +4,7 @@ import {
 } from "../../../styles/vignette/vignette-edit-page-styles";
 
 import { NextPage } from "next";
-import { VignetteUserEntryProps } from "../../../types/types";
+import { VignetteUserEntryProps } from "../../../types/vignette-types";
 
 interface Props {
   entries: VignetteUserEntryProps[];

@@ -16,14 +16,9 @@ import { NextPage } from "next";
 import Reactions from "../../components/vignette/display-page/reactions";
 import { RoundButton } from "../../styles/buttons";
 import SEO from "../../components/seo";
+import { VignetteEntryProps } from "../../types/vignette-types";
 import { useGetUserProfile } from "../../utils/user-profile";
 import { useGetVignettes } from "../../components/vignette/helpers";
-
-interface EntryProps {
-  _id: string;
-  title: string;
-  body: string;
-}
 
 const Vignette: NextPage = () => {
   const { data: user } = useGetUserProfile();
@@ -38,7 +33,10 @@ const Vignette: NextPage = () => {
     return <Loading />;
   }
 
-  const { pages } = vignettes as { pageParams: any[]; pages: EntryProps[][] };
+  const { pages } = vignettes as {
+    pageParams: any[];
+    pages: VignetteEntryProps[][];
+  };
 
   return (
     <>
@@ -59,7 +57,11 @@ const Vignette: NextPage = () => {
                 <ArticleH2>{entry.title}</ArticleH2>
                 <ArticleP>{entry.body}</ArticleP>
                 <ArticleFooter>
-                  <Reactions entryId={entry._id} user={user} />
+                  <Reactions
+                    entryId={entry._id}
+                    user={user}
+                    reactions={entry.reactions}
+                  />
                 </ArticleFooter>
               </StyledArticle>
             ))

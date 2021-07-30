@@ -1,4 +1,10 @@
-import { StyledRoundButton, Wrapper } from "../../../styles/vignette/reactions";
+import {
+  OpenReactionsButton,
+  ReactionBackground,
+  ReactionButton,
+  ReactionsWrapper,
+} from "../../../styles/vignette/reactions";
+import { ReactionProps, ReactionTypes } from "../../../types/vignette-types";
 
 import Anger from "../../../styles/icons/anger-icon";
 import CatUnicorn from "../../../styles/icons/cat-unicorn-icon";
@@ -9,17 +15,21 @@ import TropicalFlower from "../../../styles/icons/tropical-flower-icon";
 import { UserProfileProps } from "../../../types/types";
 import YellowUmbrella from "../../../styles/icons/yellow-umbrella-icon";
 import fetch from "isomorphic-unfetch";
+import { getReactionButton } from "./helpers";
 import { useState } from "react";
 
 interface Props {
   entryId: string;
   user: UserProfileProps;
+  reactions: ReactionProps[];
 }
 
-const Reactions: NextPage<Props> = ({ entryId, user }: Props) => {
-  const [showReactions, setShowReactions] = useState<boolean>(false);
+const Reactions: NextPage<Props> = ({ entryId, user, reactions }: Props) => {
+  const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
 
-  const submitReaction = async (reaction: string) => {
+  // TODO: Optimistically mutate
+
+  const submitReaction = async (reaction: ReactionTypes) => {
     const { status } = await fetch("/api/vignette/post-reaction", {
       method: "POST",
       body: JSON.stringify({
@@ -33,46 +43,75 @@ const Reactions: NextPage<Props> = ({ entryId, user }: Props) => {
 
   return (
     <>
-      <Wrapper>
-        <StyledRoundButton>
-          <CatUnicorn />
-        </StyledRoundButton>
-      </Wrapper>
-      <Wrapper>
-        <StyledRoundButton
-          onClick={() => setShowReactions(!showReactions)}
+      {!!reactions.length && (
+        <ReactionsWrapper>
+          {reactions.map((reaction) => (
+            <ReactionBackground key={reaction._id}>
+              {getReactionButton(reaction.reaction)}
+            </ReactionBackground>
+          ))}
+        </ReactionsWrapper>
+      )}
+      <ReactionsWrapper>
+        <OpenReactionsButton
+          onClick={() => setIsCollapsed(!isCollapsed)}
           aria-label="Add reaction"
         >
-          +
-        </StyledRoundButton>
-        {showReactions && (
+          {isCollapsed ? "+" : "-"}
+        </OpenReactionsButton>
+        {!isCollapsed && (
           <>
-            <StyledRoundButton
+            <ReactionButton
               onClick={() => {
-                setShowReactions(!showReactions);
+                setIsCollapsed(!isCollapsed);
                 submitReaction("cat-unicorn");
               }}
             >
               <CatUnicorn />
-            </StyledRoundButton>
-            <StyledRoundButton>
+            </ReactionButton>
+            <ReactionButton
+              onClick={() => {
+                setIsCollapsed(!isCollapsed);
+                submitReaction("heart");
+              }}
+            >
               <SolidHeart />
-            </StyledRoundButton>
-            <StyledRoundButton>
+            </ReactionButton>
+            <ReactionButton
+              onClick={() => {
+                setIsCollapsed(!isCollapsed);
+                submitReaction("flower");
+              }}
+            >
               <TropicalFlower />
-            </StyledRoundButton>
-            <StyledRoundButton>
+            </ReactionButton>
+            <ReactionButton
+              onClick={() => {
+                setIsCollapsed(!isCollapsed);
+                submitReaction("umbrella");
+              }}
+            >
               <YellowUmbrella />
-            </StyledRoundButton>
-            <StyledRoundButton>
+            </ReactionButton>
+            <ReactionButton
+              onClick={() => {
+                setIsCollapsed(!isCollapsed);
+                submitReaction("stop-sign");
+              }}
+            >
               <NoStopping />
-            </StyledRoundButton>
-            <StyledRoundButton>
+            </ReactionButton>
+            <ReactionButton
+              onClick={() => {
+                setIsCollapsed(!isCollapsed);
+                submitReaction("angry-face");
+              }}
+            >
               <Anger />
-            </StyledRoundButton>
+            </ReactionButton>
           </>
         )}
-      </Wrapper>
+      </ReactionsWrapper>
     </>
   );
 };

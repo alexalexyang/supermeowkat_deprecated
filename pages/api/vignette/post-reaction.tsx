@@ -7,22 +7,28 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { id, entryId, reaction } = JSON.parse(req.body);
 
-    const user_id = new ObjectId(id);
-
     const conn = (await connectToDatabase("vignette")).collection("reaction");
 
-    const { insertedCount } = await conn.insertOne({
-      user_id,
-      entryId,
-      reaction,
-    });
+    const { modifiedCount, upsertedCount } = await conn.updateOne(
+      { user_id: new ObjectId(id), entryId: new ObjectId(entryId) },
+      {
+        $set: {
+          user_id: new ObjectId(id),
+          entryId: new ObjectId(entryId),
+          reaction,
+        },
+      },
+      { upsert: true }
+    );
 
-    if (insertedCount === 1) {
-      return res.status(200).json({ status: "success" });
+    if (modifiedCount === 1 || upsertedCount === 1) {
+      return res.status(200).json({
+        status: "success",
+      });
     }
 
-    return res.status(500).json({ status: "fail" });
+    return res.status(200).json({ status: "fail" });
   } catch (error) {
-    res.status(error.status || 500).json({ success: false });
+    res.status(error.status || 500).json({ success: "fail", error });
   }
 };

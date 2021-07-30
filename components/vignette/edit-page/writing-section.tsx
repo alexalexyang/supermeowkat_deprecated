@@ -6,13 +6,14 @@ import {
   WritingSectionFooter,
   WritingSectionWrapper,
 } from "../../../styles/vignette/vignette-edit-page-styles";
-import { UserProfileProps, VignetteUserEntryProps } from "../../../types/types";
 import { useMutation, useQueryClient } from "react-query";
 
 import { GenericButton } from "../../../styles/buttons";
 import { NextPage } from "next";
 import { StyledForm } from "../../../styles/forms";
 import { StyledWarning } from "../../../styles/misc-styles";
+import { UserProfileProps } from "../../../types/types";
+import { VignetteUserEntryProps } from "../../../types/vignette-types";
 import { addEditVignette } from "../helpers";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
