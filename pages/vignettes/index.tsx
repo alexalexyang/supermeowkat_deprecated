@@ -4,11 +4,11 @@ import {
   ArticleP,
   EntriesSection,
   StyledArticle,
-} from "../../styles/page-styles/vignette-display-page-styles";
+} from "../../styles/vignette/vignette-display-page-styles";
 import {
   Header,
   PageWrapper,
-} from "../../styles/page-styles/vignette-edit-page-styles";
+} from "../../styles/vignette/vignette-edit-page-styles";
 
 import Link from "next/link";
 import Loading from "../../components/loading";

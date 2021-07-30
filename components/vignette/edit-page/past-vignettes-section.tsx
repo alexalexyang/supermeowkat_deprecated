@@ -1,7 +1,7 @@
 import {
   PastVignettesSectionWrapper,
   StyledDetails,
-} from "../../../styles/page-styles/vignette-edit-page-styles";
+} from "../../../styles/vignette/vignette-edit-page-styles";
 
 import { NextPage } from "next";
 import { VignetteUserEntryProps } from "../../../types/types";

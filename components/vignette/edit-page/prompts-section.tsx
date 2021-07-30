@@ -1,7 +1,7 @@
 import {
   PromptSection,
   StyledSpan,
-} from "../../../styles/page-styles/vignette-edit-page-styles";
+} from "../../../styles/vignette/vignette-edit-page-styles";
 
 import CloseButton from "../../close-button";
 import { GenericButton } from "../../../styles/buttons";

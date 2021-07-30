@@ -5,7 +5,7 @@ import {
   StyledTextArea,
   WritingSectionFooter,
   WritingSectionWrapper,
-} from "../../../styles/page-styles/vignette-edit-page-styles";
+} from "../../../styles/vignette/vignette-edit-page-styles";
 import { UserProfileProps, VignetteUserEntryProps } from "../../../types/types";
 import { useMutation, useQueryClient } from "react-query";
 

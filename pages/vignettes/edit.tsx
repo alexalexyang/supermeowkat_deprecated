@@ -2,7 +2,7 @@ import {
   AddVignetteWrapper,
   Header,
   PageWrapper,
-} from "../../styles/page-styles/vignette-edit-page-styles";
+} from "../../styles/vignette/vignette-edit-page-styles";
 
 import { NextPage } from "next";
 import PastVignettesSection from "../../components/vignette/edit-page/past-vignettes-section";
