@@ -72,9 +72,9 @@ export type UserProfileProps = {
   job: string;
 };
 
-export type VignetteEntryProps = {
+export type VignetteUserEntryProps = {
   userId: string;
-  entryId?: string;
+  _id?: string;
   title: string;
   body: string;
 };

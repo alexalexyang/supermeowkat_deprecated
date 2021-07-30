@@ -6,7 +6,7 @@ import {
   WritingSectionFooter,
   WritingSectionWrapper,
 } from "../../../styles/page-styles/vignette-edit-page-styles";
-import { UserProfileProps, VignetteEntryProps } from "../../../types/types";
+import { UserProfileProps, VignetteUserEntryProps } from "../../../types/types";
 import { useMutation, useQueryClient } from "react-query";
 
 import { GenericButton } from "../../../styles/buttons";
@@ -30,8 +30,9 @@ const WritingSection: NextPage<Props> = ({ profile }: Props) => {
       const { data: updatedEntry } = await data.json();
 
       const cachedEntries =
-        (queryClient.getQueryData("user-vignettes") as VignetteEntryProps[]) ??
-        [];
+        (queryClient.getQueryData(
+          "user-vignettes"
+        ) as VignetteUserEntryProps[]) ?? [];
 
       cachedEntries.push(updatedEntry);
 

@@ -1,24 +1,32 @@
-import { VignetteEntryProps } from "../../types/types";
+import { useInfiniteQuery, useQuery } from "react-query";
+
+import { VignetteUserEntryProps } from "../../types/types";
 import fetch from "isomorphic-unfetch";
-import { useQuery } from "react-query";
 
-export const useGetVignettes = ({ lastEntryId }: { lastEntryId?: string }) =>
-  useQuery(
-    "vignettes",
-    async () => {
-      const { entries } = await (
-        await fetch("/api/vignette/get-paginated-entries", {
-          method: "POST",
-          body: JSON.stringify({
-            lastEntryId,
-          }),
-        })
-      ).json();
+const fetchPage = async (pageParam: string) => {
+  const { entries } = await (
+    await fetch("/api/vignette/get-paginated-entries", {
+      method: "POST",
+      body: JSON.stringify({
+        lastEntryId: pageParam,
+      }),
+    })
+  ).json();
 
-      return entries;
+  return entries;
+};
+
+export const useGetVignettes = () =>
+  useInfiniteQuery("vignettes", ({ pageParam }) => fetchPage(pageParam), {
+    getNextPageParam: (lastPage) => {
+      if (!lastPage) {
+        return;
+      }
+
+      return lastPage[lastPage.length - 1]._id;
     },
-    { refetchOnMount: "always" }
-  );
+    refetchOnMount: "always",
+  });
 
 export const useGetUserVignettes = (userId: string | undefined) =>
   useQuery(
@@ -35,15 +43,15 @@ export const useGetUserVignettes = (userId: string | undefined) =>
 
 export const addEditVignette = ({
   userId,
-  entryId,
+  _id,
   title,
   body,
-}: VignetteEntryProps) =>
+}: VignetteUserEntryProps) =>
   fetch("/api/vignette/post-entry", {
     method: "POST",
     body: JSON.stringify({
       userId,
-      entryId,
+      _id,
       title,
       body,
     }),

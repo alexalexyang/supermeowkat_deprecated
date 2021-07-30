@@ -4,13 +4,7 @@
 
 ### 1.21
 
-- Vignettes
-
-  - Paginate display vignettes
-    - https://react-query.tanstack.com/guides/infinite-queries
-    - Extract a few to display on top in random manner
-    - Paginate the rest
-  - Allow people to like vignettes (use react-query)
+- Allow people to like vignettes (use react-query)
 
 - Profile
   - Get city from browser
@@ -49,9 +43,13 @@
 - Allow accounts for Sweden and Germany
 - Set up other payment systems
 
+## TODO:
+
+- Get random few vignettes to display on top of ordered ones
+- Allow saving vignette entry as draft
+
 ## Long term TODO:
 
-- Allow saving vignette entry as draft
 - Research Calibre for books
 - Maybe add academic papers?
 - Add food. Take photos, tag them, upload to backblaze. Collaborate with influencers to get photos of diverse cuisine. Or just get recipes from some recipes API and cross-reference by keyword to OSM data on restaurants.
