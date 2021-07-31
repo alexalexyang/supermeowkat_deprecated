@@ -6,7 +6,7 @@ import SolidHeart from "../../../styles/icons/heart-solid-icon";
 import TropicalFlower from "../../../styles/icons/tropical-flower-icon";
 import YellowUmbrella from "../../../styles/icons/yellow-umbrella-icon";
 
-export const getReactionButton = (reactionType: ReactionTypes) => {
+export const getReactionIcon = (reactionType: ReactionTypes) => {
   switch (reactionType) {
     case "cat-unicorn":
       return <CatUnicorn />;

@@ -1,10 +1,13 @@
-export type ReactionTypes =
-  | "cat-unicorn"
-  | "heart"
-  | "flower"
-  | "umbrella"
-  | "stop-sign"
-  | "angry-face";
+export const reactionIcons = [
+  "cat-unicorn",
+  "heart",
+  "flower",
+  "umbrella",
+  "stop-sign",
+  "angry-face",
+] as const;
+
+export type ReactionTypes = typeof reactionIcons[number];
 
 export interface ReactionProps {
   _id: string; // Reaction Id
