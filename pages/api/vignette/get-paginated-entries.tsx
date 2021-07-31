@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 import { ObjectId } from "mongodb";
-import { VignetteEntryProps } from "../../../types/vignette-types";
+import { VignetteProps } from "../../../types/vignette-types";
 import { connectToDatabase } from "../db-connections/helper";
 
 const ITEMS_PER_PAGE = 2;
@@ -34,7 +34,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { lastEntryId } = JSON.parse(req.body);
 
-    const entries: VignetteEntryProps[] = await getVignetteEntries(lastEntryId);
+    const entries: VignetteProps[] = await getVignetteEntries(lastEntryId);
 
     return res.status(200).json({ status: "success", entries: entries ?? [] });
   } catch (error) {

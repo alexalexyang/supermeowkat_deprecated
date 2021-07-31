@@ -16,11 +16,11 @@ import { NextPage } from "next";
 import Reactions from "../../components/vignette/display-page/reactions";
 import { RoundButton } from "../../styles/buttons";
 import SEO from "../../components/seo";
-import { VignetteEntryProps } from "../../types/vignette-types";
+import { VignetteProps } from "../../types/vignette-types";
 import { useGetUserProfile } from "../../utils/user-profile";
-import { useGetVignettes } from "../../components/vignette/helpers";
+import { useGetVignettes } from "../../components/vignette/display-page/helpers";
 
-const Vignette: NextPage = () => {
+const VignettesPage: NextPage = () => {
   const { data: user } = useGetUserProfile();
   const {
     data: vignettes,
@@ -35,7 +35,7 @@ const Vignette: NextPage = () => {
 
   const { pages } = vignettes as {
     pageParams: any[];
-    pages: VignetteEntryProps[][];
+    pages: VignetteProps[][];
   };
 
   return (
@@ -78,4 +78,4 @@ const Vignette: NextPage = () => {
   );
 };
 
-export default Vignette;
+export default VignettesPage;

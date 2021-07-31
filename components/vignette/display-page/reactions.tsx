@@ -4,16 +4,11 @@ import {
   ReactionButton,
   ReactionsWrapper,
 } from "../../../styles/vignette/reactions-styles";
-import {
-  ReactionProps,
-  ReactionTypes,
-  reactionIcons,
-} from "../../../types/vignette-types";
+import { ReactionIcons, ReactionProps } from "../../../types/vignette-types";
+import { getReactionIcon, useMutateReaction } from "./helpers";
 
 import { NextPage } from "next";
 import { UserProfileProps } from "../../../types/types";
-import fetch from "isomorphic-unfetch";
-import { getReactionIcon } from "./helpers";
 import { useState } from "react";
 
 interface Props {
@@ -24,20 +19,7 @@ interface Props {
 
 const Reactions: NextPage<Props> = ({ entryId, user, reactions }: Props) => {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
-
-  // TODO: Optimistically mutate
-
-  const postReaction = async (reaction: ReactionTypes) => {
-    const { status } = await fetch("/api/vignette/post-reaction", {
-      method: "POST",
-      body: JSON.stringify({
-        id: user.id,
-        entryId,
-        reaction,
-      }),
-    });
-    console.log(status);
-  };
+  const submitReaction = useMutateReaction();
 
   return (
     <>
@@ -58,12 +40,16 @@ const Reactions: NextPage<Props> = ({ entryId, user, reactions }: Props) => {
           {isCollapsed ? "+" : "-"}
         </OpenReactionsButton>
         {!isCollapsed &&
-          reactionIcons.map((icon, idx) => (
+          ReactionIcons.map((icon, idx) => (
             <ReactionButton
               key={idx}
               onClick={() => {
                 setIsCollapsed(!isCollapsed);
-                postReaction(icon);
+                submitReaction.mutate({
+                  newReactionType: icon,
+                  userId: user.id,
+                  entryId,
+                });
               }}
             >
               {getReactionIcon(icon)}

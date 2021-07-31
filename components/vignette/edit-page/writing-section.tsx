@@ -13,8 +13,8 @@ import { NextPage } from "next";
 import { StyledForm } from "../../../styles/forms";
 import { StyledWarning } from "../../../styles/misc-styles";
 import { UserProfileProps } from "../../../types/types";
-import { VignetteUserEntryProps } from "../../../types/vignette-types";
-import { addEditVignette } from "../helpers";
+import { UserVignetteProps } from "../../../types/vignette-types";
+import { addEditVignette } from "./helpers";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 
@@ -31,9 +31,8 @@ const WritingSection: NextPage<Props> = ({ profile }: Props) => {
       const { data: updatedEntry } = await data.json();
 
       const cachedEntries =
-        (queryClient.getQueryData(
-          "user-vignettes"
-        ) as VignetteUserEntryProps[]) ?? [];
+        (queryClient.getQueryData("user-vignettes") as UserVignetteProps[]) ??
+        [];
 
       cachedEntries.push(updatedEntry);
 

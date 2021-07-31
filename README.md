@@ -4,8 +4,6 @@
 
 ### 1.21
 
-- Use optimistic mutation for reactions
-
 - Profile
   - Get city from browser
 

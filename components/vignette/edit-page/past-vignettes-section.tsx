@@ -4,10 +4,10 @@ import {
 } from "../../../styles/vignette/vignette-edit-page-styles";
 
 import { NextPage } from "next";
-import { VignetteUserEntryProps } from "../../../types/vignette-types";
+import { UserVignetteProps } from "../../../types/vignette-types";
 
 interface Props {
-  entries: VignetteUserEntryProps[];
+  entries: UserVignetteProps[];
 }
 
 const PastVignettes: NextPage<Props> = ({ entries }: Props) => {
@@ -15,7 +15,7 @@ const PastVignettes: NextPage<Props> = ({ entries }: Props) => {
     <PastVignettesSectionWrapper>
       <h2>Past vignettes</h2>
 
-      {entries.map((item: VignetteUserEntryProps) => (
+      {entries.map((item: UserVignetteProps) => (
         <StyledDetails key={item._id}>
           <summary>{item.title}</summary>
           <p>{item.body}</p>
