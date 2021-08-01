@@ -2,30 +2,27 @@
 
 ## Milestones
 
-### 1.21
-
-- Profile
-  - Get city from browser
-
-### 1.22
+### 1
 
 - WebRTC for text-messaging between clients
+
+### 2
+
 - General clean-up, make sure everything works
-
-### 1.23
-
+- Profile
+  - Get city from browser
 - Create page to display costs of running an app
 - Set up Patreon/buymeacoffee/other for cash
 - Add cookie with ttl of one month to disable likes on client for already liked movies
 - Do something with the no button, esp. on item pages
 
-### 1.3:
+### 3
 
 - Add tracker permissions banner
 - Commission assets like logo, FB and Twitter banners
 - Commission other designs like buttons, colour scheme, layout, font, etc
 
-### 2.1:
+### 4
 
 - Settings
 - Match people if they like at least 5 of the same movies
@@ -34,7 +31,7 @@
   - Remember to set up which Auth0 tenant to add user to and delete from.
   - Delete is in [hooks](https://manage.auth0.com/dashboard/eu/alexalexyang/hooks)
 
-### 2.2:
+### 5
 
 - Allow users to match only after age and city are filled in
 - Buy ads on different platforms in a sequential manner to study their effectiveness

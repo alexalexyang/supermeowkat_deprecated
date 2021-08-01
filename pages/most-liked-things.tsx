@@ -28,7 +28,7 @@ const MostLikedThings: NextPage = () => {
     <>
       <SEO
         page="Most Liked Things"
-        description={"Top 5 loved movies from around the world!"}
+        description={"Top 10 loved movies from around the world!"}
       />
       <MostLikedWrapper>
         <h1>Most Liked</h1>

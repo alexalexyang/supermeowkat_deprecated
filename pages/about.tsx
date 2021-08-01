@@ -1,11 +1,9 @@
 import { CenterColumn, PageSection, PageWrapper } from "../styles/page-styles";
 
 import Image from "next/image";
-import Link from "next/link";
 import { NextPage } from "next";
 import SEO from "../components/seo";
 import TMDBLogo from "../public/tmdb_logo.svg";
-// import Tabs from "../components/tabs";
 import showdown from "showdown";
 import styled from "styled-components";
 
@@ -23,17 +21,6 @@ const ImgWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  animation: rotation 60s infinite linear;
-
-  @keyframes rotation {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(359deg);
-    }
-  }
 `;
 
 const StyledImg = styled.img`
@@ -41,7 +28,12 @@ const StyledImg = styled.img`
   width: 200px;
   border-radius: 40%;
   border: 1px solid lightgray;
-  /* box-shadow: 2px 2px 5px gray; */
+  box-shadow: 2px 2px 5px lightgray;
+
+  :hover {
+    transform: scale(1.2);
+    transition: transform 0.2s;
+  }
 `;
 
 export const tabContent = [
@@ -92,17 +84,19 @@ const About: NextPage = () => {
             </p>
 
             <p>
-              A research object with which I reason about social networks. Baby
-              research writing{" "}
+              A research object with which I reason about social networks.
+              {/* Baby research writing{" "}
               <Link href="https://supermeowkat.com/research">
                 <a href="https://supermeowkat.com/research">here</a>
               </Link>
-              .
+              . */}
             </p>
 
+            <h2>Roadmap</h2>
+
             <p>
-              No idea when it&apos;ll be finished. Maybe first full iteration by
-              end 2021.
+              There&apos;s <i>a lot</i> to do. Maybe first full iteration by end
+              2021.
             </p>
 
             {/* <Tabs content={tabContent} /> */}

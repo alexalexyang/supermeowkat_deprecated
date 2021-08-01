@@ -17,7 +17,7 @@ const getTopMovies = async (req: NextApiRequest, res: NextApiResponse) => {
     const moviesfromDb = await moviesConn
       .find({})
       .sort({ likes: -1, _id: -1 })
-      .limit(5)
+      .limit(10)
       .toArray();
 
     const fetchedMovies = await moviesfromDb.map(async (movie: any) => {
